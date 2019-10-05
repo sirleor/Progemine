@@ -32,3 +32,59 @@ def vahimatest_suurim(taisarvud):
         else:
             i+=1
     return True
+
+Ül 3
+#Järgnevad funktsioonid võtavad argumendiks 5 x 5 maatriksi, 
+#mis tähistab Bingo Loto tabelit ning milles iga element on kas täisarv lõigust 1 - 75 
+#või suur trükitäht X. Täht X sümboliseerib seda, et vastav arv on mängus juba loositud.
+#1. Koostada funktsioon voitis_nurkademangu, mis tagastab tõeväärtuse vastavalt sellele, kas see mänguväli on võitnud nurkademängu: kõik mänguvälja nurgad on loositud.
+#2. Koostada funktsioon voitis_diagonaalidemangu, mis tagastab tõeväärtuse vastavalt sellele, kas see mänguväli on võitnud diagonaalidemängu: kõik mänguvälja diagonaalidel olevad arvud on loositud. Selleks koostada ja kasutada kahte abifunktsiooni:
+#Funktsioon x_peadiagonaalil, mis võtab argumendiks mänguvälja ja tagastab selle peadiagonaalil olevate X arvu.
+#Funktsioon x_korvaldiagonaalil, mis võtab argumendiks mänguvälja ja tagastab selle kõrvaldiagonaalil olevate X arvu.
+#3. Koostada funktsioon voitis_taismangu, mis tagastab tõeväärtuse vastavalt sellele, kas see mänguväli on võitnud täismängu: kõik mänguvälja arvud on loositud.
+
+def voitis_nurkademangu(maatriks):
+    if maatriks[0][0]=="X" and maatriks[0][4]=="X" and maatriks[4][0]=="X"and maatriks[4][4]=="X":
+        return True
+    return False
+
+def x_peadiagonaalil(maatriks):  
+    i=0
+    j=0
+    kokku=0
+    for i in range(len(maatriks)):
+        if maatriks[i][j]=="X":
+            kokku+=1
+            i+=1
+            j+=1
+        else:
+            i+=1
+            j+=1
+    return kokku
+
+def x_korvaldiagonaalil(maatriks):
+    i=0
+    j=4
+    kokku=0
+    for i in range(len(maatriks)):
+        if maatriks[i][j]=="X":
+            kokku+=1
+            i+=1
+            j-=1
+        else:
+            i+=1
+            j-=1
+    return kokku
+                
+def voitis_diagonaalidemangu(maatriks):
+    if x_peadiagonaalil(maatriks)==5 and x_korvaldiagonaalil(maatriks)==5:
+        return True
+    else:
+        return False
+
+def voitis_taismangu(maatriks):
+    for i in range(len(maatriks)):
+        for j in range(len(maatriks[i])):
+            if maatriks[i][j]!="X":
+                return False
+    return True
