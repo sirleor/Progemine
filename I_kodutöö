@@ -1,0 +1,34 @@
+Ül 1
+#Koostada funktsioon vahimatest_suurim, mis võtab argumendiks täisarvude maatriksi kahemõõtmelise järjendina ja tagastab antud maatriksist kõikide ridade vähimatest elementidest suurima.
+#Teisisõnu peab tagastatav element olema vähim element oma reas, suurim element kõikide selliste elementide seas, mis on oma reas vähimad.
+
+def vahimatest_suurim(taisarvud):
+    uus_lst=[]
+    for i in taisarvud:
+        uus_lst.append(min(i))  #leiab sisemisest reast vähimad ja loeb need uude listi
+    return max(uus_lst)
+
+Ül 2
+#Koostada funktsioon on_bingo_tabel, mis võtab argumendiks 5 x 5 maatriksi, 
+#milles iga element on täisarv lõigust 1 - 75, ning 
+#tagastab tõeväärtuse vastavalt sellele, kas arvud selles tabelis on veergudesse jaotatud vastavalt Bingo Loto reeglitele.
+#Et tegu oleks korrektse Bingo Loto mänguväljaga, peavad vasakpoolseimas veerus olevad arvud kuuluma lõiku 1 - 15, 
+#järgmises veerus olevad arvud lõiku 16 - 30 ja nii edasi, kuni viimases veerus on ainult arvud lõigust 61 - 75. 
+#Lihtsuse mõttes võib siin ülesandes eeldada, et kõik arvud on antud tabelis unikaalsed ehk ükski arv ei esine tabelis rohkem kui üks kord.
+   
+    def on_bingo_tabel(maatriks):
+    i=0
+    for i in range(len(maatriks)):
+        if maatriks[i][0]<1 or maatriks[i][0]>15:
+            return False
+        elif maatriks[i][1]<=15 or maatriks[i][1]>30:
+            return False
+        elif maatriks[i][2]<=30 or maatriks[i][2]>45:
+            return False
+        elif maatriks[i][3]<=45 or maatriks[i][3]>60:
+            return False
+        elif maatriks[i][4]<=60 or maatriks[i][4]>75:
+            return False
+        else:
+            i+=1
+    return True
