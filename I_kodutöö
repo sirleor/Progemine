@@ -88,3 +88,29 @@ def voitis_taismangu(maatriks):
             if maatriks[i][j]!="X":
                 return False
     return True
+    
+Ül 4
+#On antud fail, kus igal real on tühikutega eraldatud täisarvud. Arvude hulk ridadel võib olla erinev. Eesmärk on igal real olevad arvud kokku liita ja leida saadud summadest suurim.
+#Koostada programm, mis küsib kasutajalt failinime, leiab, mis rida failist sisaldab kõige suuremat summat, väljastab suurima summaga rea järjekorranumbri ja vastava summa ekraanile.
+#Ridade järjekorranumbrid algavad tavapäraselt ühest.
+
+failinimi=open(input("Sisestage failinimi: "))
+read=[]
+for rida in failinimi:
+    eraldi=[]
+    osad=rida.split()
+    for osa in osad:
+        eraldi.append(int(osa))
+    read.append(eraldi)
+
+uus_list=[]
+for i in range(len(read)):
+    summa=0
+    for j in range(len(read[i])):
+        summa+=read[i][j]
+    uus_list.append(summa)
+
+failinimi.close()
+
+print("Suurim summa on failis "+str((uus_list.index(max(uus_list)))+1) + ". real ja see on "+ str(max(uus_list))+".")
+
