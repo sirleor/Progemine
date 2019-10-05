@@ -1,21 +1,44 @@
-def etapi_pikkus(tee_pikkus_r, lisatav_pikkus):
-    pikkus=tee_pikkus_r+(float(tee_pikkus_r)*int(lisatav_pikkus)/100)
-    return round(pikkus,2)
-    
-failinimi=input("Sisestage failinimi: ")
-protsent=int(input("Mitu protsenti tuleb igale päevateekonnale juurde lisada? "))
-readfailist=open(failinimi, encoding="UTF-8")
-read=[]
-for rida in readfailist:
-    read.append(float(rida))
-readfailist.close()
-summa=0
-for i in range(len(read)):
-    if (etapi_pikkus(read[i], protsent))>30:
-        summa=summa+etapi_pikkus(read[i], protsent)
-        print (str(etapi_pikkus(read[i],protsent))+" See oli raske!")
+Ül
+##Kalev otsustas minna jalgsi ja seljakotiga pikemale rännuteele, kus käib ka palju teisi rändajaid. 
+Ta hankis endale raamatu, kus on piirkondade kaardid ning kirjas soovituslikud päevateekonnad,
+mida ta otsustas järgida. Teel olles pani ta tähele, et tegelikud teekonnad on kõik natuke pikemad,
+kui raamatus kirjas oli. Nüüd soovis ta teada saada, kui palju ta tegelikult iga päev käis ja kui pikk
+oli teekond kokku.
+Koostada funktsioon etapi_pikkus, mis
+● võtab argumentideks päevateekonna pikkuse kilomeetrites raamatu järgi (ujukomaarv)
+ning lisatava pikkuse protsentides (täisarv),
+● tagastab tegeliku päevateekonna pikkuse ümardatuna sajandikeni.
+
+Koostada programm, mis
+● küsib kasutajalt
+○ failinime (failis on eraldi ridadel päevateekonnad raamatu järgi);
+○ mitu protsenti tuleb igale päevateekonnale juurde lisada (täisarv);
+● loeb failist päevateekondade pikkused kilomeetrites raamatu järgi;
+● arvutab (funktsiooni etapi_pikkus abil) tegelikud päevateekonnad;
+● väljastab ekraanile tegelikud päevateekonnad;
+● kui tegelik päevateekond oli pikem kui 30 kilomeetrit, siis lisab teekonna pikkuse järele:
+“See oli raske!”
+● arvutab teekonna kogupikkuse ümardatuna sajandikeni ja väljastab ekraanile. ##
+
+# funktsioon, mis sisestamisel etapi_pikkus(16.7, 5) annab tulemuseks 17.54##
+def etapi_pikkus(tee_pikkus_r, lisatav_pikkus): #võtab argumentideks päevateekonna pikkuse kilomeetrites raamatu järgi (ujukomaarv) ning lisatava pikkuse protsentides (täisarv)# 
+    pikkus=tee_pikkus_r+(float(tee_pikkus_r)*int(lisatav_pikkus)/100) 
+    return round(pikkus,2)  #tagastab tegeliku päevateekonna pikkuse ümardatuna sajandikeni#
+   
+failinimi=input("Sisestage failinimi: ") #küsib kasutajalt failinime (failis on eraldi ridadel päevateekonnad raamatu järgi)#
+protsent=int(input("Mitu protsenti tuleb igale päevateekonnale juurde lisada? ")) #küsib kasutajalt mitu protsenti tuleb igale päevateekonnale juurde lisada (täisarv)#
+readfailist=open(failinimi, encoding="UTF-8") #avab kasutaja sisestatud faili#
+read=[] #luuakse järjend read#
+for rida in readfailist: 
+    read.append(float(rida))  #loetakse faili sisu järjendisse read#
+readfailist.close()   #fail suletakse#
+summa=0 #vajalik lõppsumma leidmiseks#
+for i in range(len(read)):       #kui element on järjendi pikkuse hulgas#
+    if (etapi_pikkus(read[i], protsent))>30:      #kui funktsiooni tulemus loetud faili elemendiga ja kasutaja sisestatud protsendiga on suurem kui 30#
+        summa=summa+etapi_pikkus(read[i], protsent)  #liida summale funktsiooni tulemus#
+        print (str(etapi_pikkus(read[i],protsent))+" See oli raske!")  #prindi" funktsiooni tulemus ja see oli raske!"#
     else:
-        summa=summa+etapi_pikkus(read[i], protsent)
-        print(etapi_pikkus(read[i],protsent))
+        summa=summa+etapi_pikkus(read[i], protsent)   #muul juhul lisa funktsiooni tulemus summale#
+        print(etapi_pikkus(read[i],protsent))        #prindi funktsiooni tulemus #
         
-print("Kokku kõndis rändur " + str(round(summa,2)) + " kilomeetrit.")
+print("Kokku kõndis rändur " + str(round(summa,2)) + " kilomeetrit.") #prindi palju rändur kokku kilomeetreid kõndis#
