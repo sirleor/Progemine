@@ -167,3 +167,34 @@ else:
     print("OK")
 failinimi.close()
 
+Ül 6
+
+Koostada funktsioon leidub_anagramm, mis võtab argumendiks sõnede maatriksi kahemõõtmelise järjendina, 
+milles sõned koosnevad vaid tähtedest a, b, c ja d. Funktsioon tagastab tõeväärtuse vastavalt sellele, kas selles maatriksis leidub element, mis on sellise sõne anagramm, mis on saadud temast vahetult vasakul ja vahetult paremal olevate sõnede kokkukirjutamise teel.
+
+Kui vasakul või paremal elementi ei leidu, siis tuleb seda arvestada tühja sõnena.
+
+Kontrollitakse vaid funktsiooni definitsiooni, programmis seda rakendama ei pea.
+
+def leidub_anagramm(maatriks):
+    if len(maatriks)==0:  #kontrollitakse, et kas leidub maatriks, millel pole ühtegi elementi
+        return False
+    if len(maatriks)==1 and isinstance(maatriks[0],str): # kontrollitakse, kas maatriksi pikkus on 1 ja kas maatriksi esimene element on str (ühene maatriks nt nii ['a'])
+        for i in maatriks[0]:  
+            if i in 'abcd':  #kui üks maatriksi elementidest on kas a, b, c või d
+                return True
+    if len(maatriks)==1 and isinstance(maatriks[0],list) and len(maatriks[0])==1:   #kas maatrikis pikkus on 1 ja kas maatriksi sisemine element on list ja maatriksi sisemise elemendi pikkus on 1 nt [['']] maatriks
+        return True
+    if isinstance(maatriks[0],str): #kas maatriksi esimese sisemise elemendi väärtus on str
+        if len(maatriks)==2 and sorted(list(maatriks[0]))==sorted(list(maatriks[1])):  # maatriksi pikkus on 2, list tükeldab sõned tähemärkideks nt 'ab' muutub 'a','b', sorted, sorteerib listi. Kontrollitakse nt kas ['ab', 'ba'] on anagramm ehk luuakse list ['a','b'] ja ['a','b'] ja võrreldakse neid
+            return True
+        if len(maatriks)==3 and sorted(list(maatriks[0]+maatriks[2]))==sorted(list(maatriks[1])): vt eelmist, ainult maatriksi pikkus on 3, seega võrreldakse ['a','bac','cb'] korral ['a','b','c'] ja ['a', 'b','c'] võrdust(esimene list on moodustatud esimesest ja kolmandast sõnest.
+            return True
+    for i in range(len(maatriks)):  #kui on rohkem kui 1 veerg maatriksil on vaja kahekordset loopi.
+        if len(maatriks[i])==2 and sorted(list(maatriks[i][0]))==sorted(list(maatriks[i][1])):
+            return True
+        if len(maatriks[i])==3 and sorted(list(maatriks[i][0]+maatriks[i][2]))==sorted(list(maatriks[i][1])):
+            return True
+    return False
+
+
