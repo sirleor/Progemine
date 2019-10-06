@@ -188,9 +188,9 @@ def leidub_anagramm(maatriks):
     if isinstance(maatriks[0],str): #kas maatriksi esimese sisemise elemendi väärtus on str
         if len(maatriks)==2 and sorted(list(maatriks[0]))==sorted(list(maatriks[1])):  # maatriksi pikkus on 2, list tükeldab sõned tähemärkideks nt 'ab' muutub 'a','b', sorted, sorteerib listi. Kontrollitakse nt kas ['ab', 'ba'] on anagramm ehk luuakse list ['a','b'] ja ['a','b'] ja võrreldakse neid
             return True
-        if len(maatriks)==3 and sorted(list(maatriks[0]+maatriks[2]))==sorted(list(maatriks[1])): vt eelmist, ainult maatriksi pikkus on 3, seega võrreldakse ['a','bac','cb'] korral ['a','b','c'] ja ['a', 'b','c'] võrdust(esimene list on moodustatud esimesest ja kolmandast sõnest.
+        if len(maatriks)==3 and sorted(list(maatriks[0]+maatriks[2]))==sorted(list(maatriks[1])): #vt eelmist, ainult maatriksi pikkus on 3, seega võrreldakse ['a','bac','cb'] korral ['a','b','c'] ja ['a', 'b','c'] võrdust(esimene list on moodustatud esimesest ja kolmandast sõnest.
             return True
-    for i in range(len(maatriks)):  #kui on rohkem kui 1 veerg maatriksil on vaja kahekordset loopi.
+    for i in range(len(maatriks)):  #kui on rohkem kui 1 veerg maatriksil on vaja kahekordset loopi nt [['a','b', 'c'],['ab,'c']]
         if len(maatriks[i])==2 and sorted(list(maatriks[i][0]))==sorted(list(maatriks[i][1])):
             return True
         if len(maatriks[i])==3 and sorted(list(maatriks[i][0]+maatriks[i][2]))==sorted(list(maatriks[i][1])):
