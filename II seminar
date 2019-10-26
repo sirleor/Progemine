@@ -1,0 +1,48 @@
+
+#Kirjutada funktsioon erinevad_sümbolid, mis võtab
+#argumendiks sõne ning tagastab hulga kõikide selles sõnes
+#leiduvate erinevate sümbolitega.
+ 
+
+def erinevad_sümbolid(sone):
+    hulk=set()
+    for el in sone:
+        hulk.add(el)
+    return hulk   
+   
+#print(erinevad_sümbolid("Tere"))
+
+#Lühem:
+def erinevad_sümbolid(sone):
+    hulk=set(sone)
+    return hulk 
+
+
+
+#Kirjutada funktsioon sõnade_pikkused, mis võtab
+#argumendiks sõnade järjendi, kus võib olla ka korduvaid
+#elemente, ja tagastab sõnastiku, mis sisaldab sõnade pikkusi.
+#Sõnastiku võtmeteks peaksid olema sõnad ja väärtusteks
+#täisarvud.
+
+def sõnade_pikkused(a):
+    sõnastik={}
+    for i in a:
+       sõnastik[i]=len(i)
+    return sõnastik
+
+#print(sõnade_pikkused(["Tere","Terekest", "Tere"]))
+
+#Lihtsam versioon:
+def sõnade_pikkused(sonad):
+    return {sona:len(sona) for sona in set(sonad)}
+    
+ #õppejõu versioon (erinevalt minu versioonist, teeb see vähem tööd, sest jätab korduvad vahele):
+def sõnade_pikkused(a):
+    sõnastik={}
+    for i in a:
+       if i in sõnastik:
+           pass
+       else:
+           sõnastik[i]=len(i)
+    return sõnastik
