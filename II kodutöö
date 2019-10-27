@@ -86,4 +86,42 @@ Tundmatu maa
 Jaapan
 
 
-2.3.
+#2.3. Iga erakonna valimislubadused on kirja pandud hulgana, näiteks nii:
+erakond_A = {"lastetoetusi tõsta", "pensione tõsta", "tulumaksu langetada", "kaitsekulutusi tõsta"}
+erakond_B = {"muuta kõike varasemat"}
+erakond_C = {"sisserännet piirata", "pensione tõsta", "kaitsekulutusi tõsta"}
+erakond_D = set()
+erakond_E = {"väljarännet piirata", "pensione tõsta", "õpetajate palku tõsta", "kaitsekulutusi tõsta", "alkoholiaktsiisi tõsta"}
+Eesmärk on leida kaks erakonda, mis lubaduste poolest kõige enam sarnanevad. Selleks tuleb leida kaks hulka, mille ühisosa on kõige suurem.
+Koostada funktsioon kooslubajad, mis võtab argumendiks järjendi erakondade lubaduste hulkadest ja tagastab paarina (kaheelemendilise ennikuna) nende kahe erakonna indeksid järjendis, mille lubadustel on kõige suurem ühisosa. Kui selliseid paare on mitu, siis võib neist ükskõik millise tagastada.
+Kontrollitakse vaid funktsiooni definitsiooni, programmis seda rakendama ei pea.
+>>> kooslubajad([{"arstide palku tõsta", "pensione tõsta", "kaitsekulutusi tõsta"}, {"lasteaiaõpetajate palku tõsta", "motosporti toetada"}, {"sisserännet piirata", "pensione tõsta", "arstide palku tõsta", "lasteaiaõpetajate palku tõsta"}, {"arstide palku tõsta", "tuletõrjujate palku tõsta", "politsenike palku tõsta", "piirivalvurite palku tõsta", "vangivalvurite palka tõsta"}])
+(0, 2)
+>>> kooslubajad([{"algatada koduloometoetus", "kuritegevust vähendada", "kõiki toetusi suurendada", "kaotada kõik maksud", "suurendada kõiki palkasid", "rajada spordiväljakud igasse linna"}, {"toetada pensionäre", "aidata noorperesid", "edendada maaelu", "suurendada vastsündinute arvu", "vähendada suremust"}])
+(0, 1)
+
+def kooslubajad(jarjend):
+    suurimate_jarjend=[]
+    indeks=[]
+    kokkku=[]
+    suur=0
+    suurimate_indeksid=[]
+    for i in range(len(jarjend)):                    #hakkab läbi käima järjendi elemente
+        for j in range(len(jarjend)):               #hakkab läbi käima ka järjendi elemente
+            if i!=j:                                                #kui kaks järjendi elementi ei ole sama indeksiga
+                suurimate_jarjend.append(jarjend[i]&jarjend[j])      #siis lisatakse listi kahe järjendi ühisosa
+                indeks.append([i,j])                                 #samuti nende järjendite indeksid selliselt
+    if len(suurimate_jarjend)<3:                                 #kui ongi järjend, kus on ainul 2 elementi, siis ei saagi muud tulemust olla kui selline
+        return (0, 1)
+    else:
+        for a in range(len(suurimate_jarjend)):                 #muul juhul hakatakse läbi käima suurimate_järjendit
+            if len(suurimate_jarjend[a])>suur:                  #esialgselt võrreldakse 0-ga, kui on suurem, siis omandab suur uue väärtuse ehk elemendi pikkuse
+                suur=len(suurimate_jarjend[a])
+                suurimate_indeksid=[indeks[a]]                   #ja sama elemendile vastav indeks läheb suurimate indeksisse
+        return tuple(suurimate_indeksid[0])                      #lõpuks tuleb teha listist ennik
+        
+        
+        
+        
+
+
