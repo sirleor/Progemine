@@ -1,4 +1,4 @@
-#Koostada funktsioon symbolite_sagedus, mis võtab argumendiks sõne ja tagastab sõnastiku, 
+#2.1.Koostada funktsioon symbolite_sagedus, mis võtab argumendiks sõne ja tagastab sõnastiku, 
 #mis sisaldab selles sõnes esinevate tähemärkide esinemiste sagedusi. Tagastatav sõnastik peab seega sisaldama kirjeid, 
 #kus võtmeteks on ühetähemärgilised sõned (sümbolid) ja väärtusteks vastavate sõnede (sümbolite) esinemiste arv argumendiks antud sõnes.
 
@@ -15,3 +15,75 @@ def symbolite_sagedus(sone):
      
 # Nt print(symbolite_sagedus("l@htek00d"))
 # annab tulemuseks: {'l': 1, '@': 1, 'h': 1, 't': 1, 'e': 1, 'k': 1, '0': 2, 'd': 1}
+
+
+##2.2.Sõiduki registreerimismärgile või riigi tunnusmärgile on tavaliselt märgitud riigi tähis 1-3-tähelise lühendina. 
+Eesti puhul on lühendiks näiteks EST. Piirivalvel on andmebaas eri riikide tähistest tekstifailis nii, et faili igal 
+real on tühikuga eraldatud riigi tähis ja selle riigi nimi.
+Väljavõte riigitähiste failist:
+ER Eritrea
+FIN Soome
+F Prantsusmaa
+H Ungari
+LT Leedu
+EST Eesti
+S Rootsi
+Koostada funktsioon failist_sonastik, mis võtab argumendiks andmebaasi faili nime ning 
+tagastab vastava faili sisu põhjal sõnastiku, kus võtmeteks on riigitähised (sõned) ja väärtusteks riikide nimed (sõned).
+
+Koostada funktsioon tahised_nimedeks, mis võtab argumendiks järjendi riikide tähistest (sõned) ja eelmise funktsiooni poolt 
+koostatud sõnastiku ning tagastab järjendi vastavate riikide nimedest. Kui mõni tähis argumendiks antud järjendis on tundmatu, 
+siis selle riigi nimi tuleb asendada tagastatavas järjendis väärtusega None.
+
+Rakendada funktsioone sobivalt programmis, mis
+küsib kasutajalt andmebaasi faili nime,
+küsib kasutajalt sõne, mis koosneb tühikutega eraldatud piiri ületanud sõidukite riikide tähistest,
+väljastab sõidukite päritolumaade nimed üksteise alla. Kui mõni riigitähis on tundmatu, 
+siis väljastada selle riigi nime asemel Tundmatu maa.
+
+def failist_sonastik(failinimi):
+    readfailist=open(failinimi, encoding="UTF-8")
+    read=[]
+    for rida in readfailist:                  
+        read.append(rida.split())  #loeb sisse failis olevad read ja splitib kahe sõna vahelt, loeb listi tekib u selline list [['tere','tore]['tore','tere']]
+    sonastik={}
+    for i in range(len(read)):
+        for j in range(len(read)):
+            sonastik[read[i][0]]=read[i][1]  # teame, et iga listi alamelement on kahe elemendiga, seega esimene element läheb sõnastikku võtmeks ja teine väärtuseks
+    return sonastik
+    readfailist.close()               
+
+def tahised_nimedeks(soned, tulemus):                 
+    uus_list=[]
+    for i in soned:
+        if i in tulemus:                                 #võrdleb, kas leitud sõnastikus eksisteerib listis olev sõne.
+            uus_list.append(tulemus[i])                  #kui jah, lisatakse sõnastiku võtme väärtus listi
+        else:
+            uus_list.append(None)                        #kui ei tuleb none
+    return uus_list
+
+s_failinimi=input("Sisestage andmebaasi faili nimi: ")       
+piiriyletajad=input("Piiriületajad: ")
+piiriyletajate_list=[]
+piiriyletajate_list.append(piiriyletajad.split(' '))          #kuna ette antakse 1 sõne, on see vaja tükeldada tühikute kohapealt. NB! Tekib list selliselt [['J','CHN']]
+de_tulemus=tahised_nimedeks(piiriyletajate_list[0], failist_sonastik(s_failinimi))  #kasutame funtksioonid ära
+for i in de_tulemus:                                         #ja prindime välja üks haaval.
+    if i==None:
+        print("Tundmatu maa")
+    else: 
+        print(i)
+        
+  # Tulemused: 
+  #1) funktsioon aasia.txt korral: {'J': 'Jaapan', 'SGP': 'Singapur', 'IND': 'India', 'LAO': 'Laos', 'T': 'Tai', 'CHN': 'Hiina'}
+  #2) funktsioon tahised_nimedeks(['FIN', 'RUS', 'CHN', 'IND', 'F', 'LAO'], failist_sonastik("aasia.txt"))
+[None, None, 'Hiina', 'India', None, 'Laos']
+#3) kõik kokku:
+Sisestage andmebaasi faili nimi: aasia.txt 
+Piiriületajad: J CHN EST J
+Jaapan
+Hiina
+Tundmatu maa
+Jaapan
+
+
+2.3.
