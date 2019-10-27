@@ -143,5 +143,52 @@ def juhuslik_bingo():
             abitabel.append(koond[b][a])         #selleks, et loeks veerge, tuleb i ja j ära vahetada ehk siin a ja b
     return uus_tabel      
         
+#2.5Järgnevad funktsioonid võtavad argumendiks 5 x 5 maatriksi, mis tähistab Bingo Loto tabelit ning milles iga element on kas täisarv lõigust 1 - 75 või suur trükitäht X. Täht X sümboliseerib seda, et vastav arv on mängus juba loositud.
+1. Koostada funktsioon nurkademanguks_vaja, mis tagastab järjendi arvudest, mida on veel vaja loosida selleks, et antud mänguväli võidaks nurkademängu.
+2. Koostada funktsioon diagonaalidemanguks_vaja, mis tagastab järjendi arvudest, mida on veel vaja loosida selleks, et antud mänguväli võidaks diagonaalidemängu.
+3. Koostada funktsioon taismanguks_vaja, mis tagastab järjendi arvudest, mida on veel vaja loosida selleks, et antud mänguväli võidaks täismängu.
+Kontrollitakse vaid funktsioonide definitsioone, programmis neid rakendama ei pea.
 
+def nurkademanguks_vaja(maatriks):                    #otsib, kus ei ole X-i ja lisab listi nurkade koordinaadid on teada ja välja toodud
+    vaja_loosida=[]
+    if maatriks[0][0]!='X':
+        vaja_loosida.append(maatriks[0][0])
+    if maatriks[0][4]!='X':
+        vaja_loosida.append(maatriks[0][4])           
+    if maatriks[4][0]!='X':
+        vaja_loosida.append(maatriks[4][0])          
+    if maatriks[4][4]!='X':
+        vaja_loosida.append(maatriks[4][4])  
+    return (vaja_loosida)
+
+def diagonaalidemanguks_vaja(maatriks):             #otsib, kus pole diagonaalides X-i ja lisab listi, esimene pea ja teine kõrvaldiagonaaliks
+    vaja_loosida_d=[]
+    i=0
+    j=0
+    k=4
+    for i in range(len(maatriks)):
+        if maatriks[i][j]!="X":
+            vaja_loosida_d.append(maatriks[i][j])
+            i+=1
+            j+=1
+        else:
+            i+=1
+            j+=1
+    for i in range(len(maatriks)):
+        if maatriks[i][k]!="X":
+            vaja_loosida_d.append(maatriks[i][k])
+            i+=1
+            k-=1
+        else:
+            i+=1
+            k-=1
+    return list(set(vaja_loosida_d))
+
+def taismanguks_vaja(maatriks):                            #kontrollib, kus pole X-i ja ülejäänud lisab listi.
+    vaja_loosida_t=[]
+    for i in range(len(maatriks)):
+        for j in range(len(maatriks[i])):
+            if maatriks[i][j]!="X":
+                vaja_loosida_t.append(maatriks[i][j])
+    return list(set(vaja_loosida_t))
 
