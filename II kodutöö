@@ -121,7 +121,27 @@ def kooslubajad(jarjend):
         return tuple(suurimate_indeksid[0])                      #lõpuks tuleb teha listist ennik
         
         
-        
+#2.4. Koostada ilma argumentideta funktsioon juhuslik_bingo, mis tagastab juhuslikult genereeritud korrektse Bingo Loto tabeli, kus pole ühtegi ruutu veel märgitud/loositud.
+Oma lahenduse kontrollimiseks saab kasutada ülesande Reeglite kontrollimine lahendusfunktsiooni.
+Erinevalt reeglite kontrollimise ülesandest siin ülesandes lihtsustavat arvude unikaalsuse eeldust ei tehta. Seega on oluline tähele panna, et ükski arv ei tohi veerus (ega terves tabelis) korduda. Arvude genereerimiseks võib kasutada moodulist random funktsiooni sample. Komplekti arvudest esimese Bingo tabeli veeru jaoks saaks selle abil genereerida nii: sample(range(1, 16), 5).
+Kontrollitakse vaid funktsiooni definitsiooni, programmis seda rakendama ei pea.
+
+def juhuslik_bingo():
+    from random import sample
+    koond=[]
+    uus_tabel=[]
+    i=1
+    j=16
+    while i<70:                                   #esmalt genereerin 5 elemendilised listid, mis vastavad nõutud kriteeriumitele
+        koond.append(sample(range(i,j),5))        # st 1-5, 16-30, 31-45, 46-60 ja 61-75
+        i+=15
+        j+=15
+    for a in range(len(koond)):                   
+        abitabel=[]                              #hakkab koguma liste ehk ridu
+        uus_tabel.append(abitabel)               #kui rida valmis saab, loetakse see uude listi, millest kokku moodustub bingo tabel
+        for b in range(len(koond[a])):
+            abitabel.append(koond[b][a])         #selleks, et loeks veerge, tuleb i ja j ära vahetada ehk siin a ja b
+    return uus_tabel      
         
 
 
