@@ -1,0 +1,126 @@
+#3.1 Koostada funktsioon yhisosa, mis võtab argumendiks kaks järjendit ja tagastab uue järjendi, mis sisaldab ühekordselt neid elemente, mis esinesid mõlemas sisendjärjendis. Tagastatav järjend peab sisaldama ainult neid elemente, mis eelnevale tingimusele vastavad.
+#Kontrollitakse vaid funktsiooni definitsiooni, programmis seda rakendama ei pea.
+
+def yhisosa(jar1, jar2):
+    return(list(set(jar1)&set(jar2)))
+    
+#Nt yhisosa([], [1, 1]) Annab tulemuseks [], yhisosa([1, 2],[2,3]) annab tulemuseks [2]
+
+
+#3.2Koostada funktsioon listid_sonastikuks, mis võtab argumendiks kaks ühepikkust järjendit ja tagastab nende põhjal moodustatud sõnastiku, kus võtmeteks on esimese järjendi elemendid ja väärtusteks teise järjendi vastavatel positsioonidel olevad elemendid. 
+#Kui esimeses (võtmete) järjendis on korduvaid elemente, siis sõnastikku tuleb panna neist viimane koos vastava elemendiga väärtuste järjendist. Teisisõnu kirjutavad sama võtmega kirjed eelnevaid väärtuseid üle nagu sõnastiku puhul ikka kombeks.
+#Kontrollitakse vaid funktsiooni definitsiooni, programmis seda rakendama ei pea.
+
+def listid_sonastikuks(jar1, jar2):
+    sonastik={}
+3    for i in range(len(jar1)):
+        for j in range(len(jar2)):
+            sonastik[jar1[i]]=jar2[i]
+    return sonastik
+
+
+#Nt listid_sonastikuks([1, 2], [3, 4]) tulemus on: {1: 3, 2: 4}
+
+#3.3. Ülesanne on antud kahemõõtmelises arvude järjendis asendada kõik arvud nende absoluutväärtustega.
+#Kui arv on mittenegatiivne, siis selle absoluutväärtuseks nimetatakse arvu ennast. 
+#Kui arv on negatiivne, siis absoluutväärtuseks on selle arvu vastandarv. 
+#Näiteks arvu 3 absoluutväärtus on 3 ja arvu -3 absoluutväärtus on 3.
+#Seda ülesannet tuleb lahendada kahel moel:
+#Kirjutada funktsioon absoluutne_tabel, mis võtab argumendiks kahemõõtmelise arvude järjendi ja 
+#tagastab uue kahemõõtmelise järjendi, mis on saadud algsest nii, et kõik arvud on asendatud nende absoluutväärtustega.
+#Kirjutada funktsioon absolutiseeri_tabel, mis võtab argumendiks kahemõõtmelise arvude järjendi ja 
+#asendab selles järjendis kõik arvud nende absoluutväärtustega. Funktsioon ei tagasta midagi.
+
+def absoluutne_tabel(jar):
+    uus_tabel=[]
+    for i in range(len(jar)):
+        vahetabel=[]
+        uus_tabel.append(vahetabel)
+        for j in range(len(jar[i])):
+            vahetabel.append(abs(jar[i][j]))
+    return uus_tabel
+
+def absolutiseeri_tabel(jar):
+    for i in range(len(jar)):
+        for j in range(len(jar[i])):
+           jar[i][j]=abs(jar[i][j]) 
+           
+#3.4 Järgnev programmilõik väljastab kahemõõtmelise arvude järjendi puhul,
+#mitu rida on sellised, milles esimene element on suurem kui viimane element:
+jarjend_ruudus = [[4, 3, 2], [-1, 0]]
+
+alglopulisi = 0
+for rida in jarjend_ruudus:
+    if len(rida) > 1:
+        if rida[0] > rida[-1]:
+            alglopulisi += 1    	
+	
+print("Alglõpulisi ridu on " + str(alglopulisi))
+
+#Teie ülesanne on koostada funktsioon on_alglopuline nii, et alltoodud 
+#programmilõik töötaks ülaltooduga võrdväärselt mistahes kahemõõtmelise järjendi (jarjend_ruudus) puhul:
+
+jarjend_ruudus = [[4, 3, 2], [-1, 0]]
+
+alglopulisi = 0
+for rida in jarjend_ruudus:
+    alglopulisi += on_alglopuline(rida)
+
+print("Alglõpulisi ridu on " + str(alglopulisi))
+
+#Lahendus:
+def on_alglopuline(rida):
+    if (len(rida) > 1) and (rida[0] > rida[-1]):
+        return 1
+    else:
+        return 0
+
+#3.5. Järgnev programmilõik väljastab kahemõõtmelise arvude järjendi puhul, 
+#mitu rida on kasvavad s.t sellised, milles iga järgnev element on suurem eelmisest:
+jarjend_ruudus = [[4, 3, 2], [-1, 0]]
+
+kasvavaid = 0
+for rida in jarjend_ruudus:
+    if len(rida) > 0:
+        kasvav = True
+        eelmine = rida[0]
+        for el in rida[1:]:
+            if el <= eelmine:
+                kasvav = False
+                break
+            eelmine = el
+        if kasvav:
+            kasvavaid += 1
+
+print("Kasvavaid ridu on " + str(kasvavaid))
+
+#Teie ülesanne on koostada funktsioon on_kasvav nii, et alltoodud programmilõik töötaks ülaltooduga võrdväärselt 
+#mistahes kahemõõtmelise järjendi (jarjend_ruudus) puhul:
+
+jarjend_ruudus = [[4, 3, 2], [-1, 0]]
+
+kasvavaid = 0
+for rida in jarjend_ruudus:
+    kasvavaid += on_kasvav(rida)
+    
+print("Kasvavaid ridu on " + str(kasvavaid))
+
+Lahendus:
+def on_kasvav(rida):
+    if len(rida) > 0:  
+        kogur=0
+        kasvav = True  
+        eelmine = rida[0]  
+        for el in rida[1:]: 
+            if el <= eelmine:  
+                kasvav = False
+                break
+            eelmine = el
+        if kasvav:
+            kogur+=1
+        return kogur
+    else:
+        return 0
+
+
+
